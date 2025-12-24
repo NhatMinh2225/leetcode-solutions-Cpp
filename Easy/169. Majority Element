@@ -1,0 +1,40 @@
+class Solution {
+public:
+    int majorityElement(vector<int>& nums) {
+        vector<int> count;
+        vector<int> value;
+        for (int i = 0; i < nums.size(); i++){
+            if (value.empty()){
+                count.push_back(1);
+                value.push_back(nums.at(i));
+                continue;
+            }
+            bool skip = false;
+            for (int j = 0; j < count.size(); j++){
+                if (nums.at(i) == value.at(j)){
+                    count.at(j)++;
+                    skip = true;
+                    continue;
+                }
+            }
+            if (!skip){
+                count.push_back(1);
+                value.push_back(nums.at(i));
+            }
+
+        }
+
+
+        int max = count.at(0);
+        int maxNum = value.at(0);
+        for (int i = 0; i < count.size(); i++){
+
+            if (count.at(i) > max){
+                cout << "HI";
+                max = count.at(i);
+                maxNum = value.at(i);
+            }
+        }
+        return maxNum;
+    }
+};
