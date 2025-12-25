@@ -1,0 +1,33 @@
+#include <vector>
+
+class MyHashSet {
+public:
+vector<bool> hashTable = vector<bool>(1'000'001, false);
+    MyHashSet() {
+        
+    }
+    
+    void add(int key) {
+        hashTable.at(key) = true;
+    }
+    
+    void remove(int key) {
+        hashTable.at(key) = false;
+
+    }
+    
+    bool contains(int key) {
+        if (hashTable.at(key) == false){
+            return false;
+        }
+        return true;
+    }
+};
+
+/**
+ * Your MyHashSet object will be instantiated and called as such:
+ * MyHashSet* obj = new MyHashSet();
+ * obj->add(key);
+ * obj->remove(key);
+ * bool param_3 = obj->contains(key);
+ */
