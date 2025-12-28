@@ -1,0 +1,47 @@
+class Solution {
+public:
+    bool isValidSudoku(vector<vector<char>>& board) {
+        for (int i = 0; i < board.size(); i++){
+            for (int j = 0; j < board[0].size(); j++){
+                if (isdigit(board[i][j]))
+                {
+                    bool skip2 = true;
+                    for (int c = i - (i%9); c < 9; c++){
+                        if (board[i][j] == board[c][j]){
+                            if (skip2){
+                                skip2 = false;
+                                continue;
+                            }
+                            return false;
+                        }
+                    }
+
+                    bool skip3 = true;
+                    for (int v = j - (j%9); v < 9; v++){
+                        if (board[i][j] == board[i][v]){
+                            if (skip3){
+                                skip3 = false;
+                                continue;
+                            }
+                            return false;
+                        }
+                    }
+
+                    bool skip = true;
+                    for (int z = i - (i%3); z < (i - (i%3))+3; z++){
+                        for (int x = j -(j%3); x < (j -(j%3))+3; x++){
+                            if (board[i][j] == board[z][x]){
+                                if(skip){
+                                    skip = false;
+                                    continue;
+                                }
+                                return false;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return true;
+    }
+};
