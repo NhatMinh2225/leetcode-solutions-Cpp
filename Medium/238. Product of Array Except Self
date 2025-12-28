@@ -1,0 +1,40 @@
+class Solution {
+public:
+    vector<int> productExceptSelf(vector<int>& nums) {
+        bool isZero = false;
+        bool moreZero = false;
+        int product = 1;
+        for(int i = 0; i < nums.size();i++){
+            if (nums[i]!=0 || isZero){
+                product = product * nums[i];
+                if (nums[i] == 0){
+                    moreZero = true;
+                }
+            }
+            else {
+                isZero = true;
+            }
+        }
+
+    vector<int> list(nums.size());
+
+        for (int i = 0; i < nums.size(); i++){
+            if (isZero){
+                if (moreZero){
+                    list[i] = 0;
+                }
+                else {
+                    if (nums[i] == 0){
+                        list[i] = product;
+                    }
+                    else nums[i] = 0;
+                    }
+                }
+            else {
+                list[i] = product / nums[i];
+            }
+        }
+        return list;
+    }
+
+};
