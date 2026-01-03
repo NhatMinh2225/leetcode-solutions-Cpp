@@ -1,0 +1,25 @@
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& numbers, int target) {
+        int total;
+        int second = numbers.size() - 1;
+        int first = 0;
+        total = numbers[first] + numbers[second];
+        while (total != target){
+            if (total > target){
+                second --;
+            }
+            if (total < target){
+                first ++;
+            }
+            total = numbers[first] + numbers[second];
+        }
+
+        vector<int> twoSum;
+        twoSum.push_back(first+1);
+        twoSum.push_back(second+1);
+
+        return twoSum;
+
+    }
+};
