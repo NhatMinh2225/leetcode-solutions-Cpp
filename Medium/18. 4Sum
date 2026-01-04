@@ -1,0 +1,66 @@
+class Solution {
+public:
+    vector<vector<int>> fourSum(vector<int>& nums, int target) {
+        vector<vector<int>> threeSum;
+        sort (nums.begin(), nums.end());
+
+        
+
+        if (nums.size() < 4){
+            return threeSum;
+        }
+
+        long sum = 0;
+
+        if (nums.size() == 4){
+            for(int i = 0; i < 4; i++){
+                sum += nums[i];
+            }
+            if (sum == target){
+                threeSum.push_back({nums[0], nums[1], nums[2], nums[3]}); 
+            }
+            return threeSum;
+        }
+
+
+        
+        for (int i = 0; i < nums.size()-2; i++){
+            if (i > 0 && nums[i] == nums[i-1] ){
+                continue;
+            }
+            for (int j = i+1; j < nums.size()-1; j++){
+            long fixed = nums[i] + nums[j];
+            int first = j+1;
+            int last = nums.size() - 1;
+            if (j > i+1 && nums[j] == nums[j-1] ){
+                continue;
+            }
+            while (first < last){
+
+                if (nums[first] + nums[last] < target - fixed ){
+                    first++;
+                }
+                else if (nums[first] + nums[last] > target - fixed ){
+                    last--;
+                }
+                else if (nums[first] + nums[last] + fixed == target){
+
+                    threeSum.push_back({nums[last],nums[first],nums[i], nums[j]}); 
+
+                    first ++;
+                    last--;
+                    while (first < last && nums[first] == nums[first-1]){
+                        first ++;
+                    }
+                    while (last > first && nums[last] == nums[last+1]){ 
+                        last --;
+                    }
+
+
+                }     
+            }
+        }
+        }
+        return threeSum;
+    }
+};
