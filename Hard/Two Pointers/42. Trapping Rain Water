@@ -1,0 +1,57 @@
+class Solution {
+public:
+    int trap(vector<int>& height) {
+        int totalSum = 0;
+        
+        int z = 0;
+
+        while (z < height.size() && height[z] == 0){
+            z++;
+        }
+        for (int i = z; i < height.size(); i++){
+            
+            int j = i+1;
+            while (j < height.size() && height[i] > height[j]){
+                j++;
+            }
+            if (j < height.size()){
+            }
+
+            if (j != height.size() || height[j-1] > height[i]){
+                for (int f = i+1; f < j; f++){
+                    totalSum += height[i] - height[f];
+
+                }
+            }
+
+            i = j-1;
+        }
+
+
+
+        int n = height.size() - 1;
+
+        while (n > 0 && height[n] == 0){
+            n--;
+        }
+        for (int i = n; i >= 0; i--){
+            
+            int j = i-1;
+            while (j >= 0 && height[i] >= height[j]){
+                j--;
+            }
+
+            if (j+1 != 0 || height[j+1] > height[i]){
+                for (int f = i-1; f > j; f--){
+                    totalSum += height[i] - height[f];
+
+                }
+            }
+
+            i = j+1;
+
+        }
+
+        return totalSum;
+    }
+};
