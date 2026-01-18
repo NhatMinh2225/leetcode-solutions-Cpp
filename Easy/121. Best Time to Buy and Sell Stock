@@ -1,0 +1,34 @@
+class Solution {
+public:
+    int maxProfit(vector<int>& prices) {
+        int maxProfit = 0;
+        int left = 0;
+        int right = 0;
+        int index = 0;
+        for (int i = 0; i < prices.size()-1; i++){
+            if(prices[i+1] < prices[i]){
+                left ++;
+                right++;
+                index++;
+            }   
+            else break;
+        }
+
+        for (int i = index; i < prices.size(); i++){
+            if(prices[i] > prices[right]){
+                right = i;
+                maxProfit = max(maxProfit, prices[right] - prices[left]);
+            }   
+            else{
+                if (prices[i] < prices[left]){
+                    maxProfit = max(maxProfit, prices[right] - prices[left]);
+                    right =  i;
+                    left = i;             
+                }
+            }
+        }
+
+
+        return maxProfit;
+    }
+};
